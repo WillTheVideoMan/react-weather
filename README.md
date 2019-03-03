@@ -1,4 +1,4 @@
-###`react-weather`
+### `react-weather`
 
 React component that turns weather data into animations.
 
