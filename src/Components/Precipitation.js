@@ -154,7 +154,6 @@ class Precipitation extends Component {
       amount * width * height * 0.001 < 1000
         ? amount * width * height * 0.001
         : 1000;
-    console.log(count);
 
     /**
      * Pushes new randomly generated drops onto the 'droplets' array. 'droplets' is an array of unnamed objects.
