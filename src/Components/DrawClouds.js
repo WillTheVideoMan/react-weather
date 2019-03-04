@@ -12,23 +12,14 @@ class DrawClouds extends Component {
   componentDidUpdate() {
     const { width, height, clouds, style } = this.props;
 
-    const size = 150;
-
-    this.ctx.fillStyle = "rgba(255,255,255,0.4)";
-
+    this.ctx.fillStyle = "rgba(255,255,255,0.3)";
     this.ctx.clearRect(0, 0, width, height);
 
-    for (let i = 0; i < 70; i++) {
+    clouds.forEach(cloud => {
       this.ctx.beginPath();
-      this.ctx.arc(
-        Math.random() * width,
-        -size / 2 + 10,
-        Math.random() * size,
-        0,
-        2 * Math.PI
-      );
+      this.ctx.arc(cloud.x, cloud.y, cloud.size, 0, Math.PI * 2);
       this.ctx.fill();
-    }
+    });
   }
   render() {
     return (
