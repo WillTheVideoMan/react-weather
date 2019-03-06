@@ -12,7 +12,7 @@ class Weather extends Component {
         refreshMode="throttle"
         refreshRate={500}
       >
-        <Clouds width={0} height={0} cover={1} wind={1} />
+        <Clouds width={0} height={0} cover={1} wind={1} rain={1} />
       </ReactResizeDetector>
     );
   }
