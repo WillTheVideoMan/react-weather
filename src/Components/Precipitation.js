@@ -91,20 +91,17 @@ class Precipitation extends Component {
    */
   componentDidUpdate(prevProps) {
     /**
-     * If the type or amount of precipitation changes, then we must update the style and dynamics of the droplets.
-     */
-    if (
-      prevProps.type !== this.props.type ||
-      prevProps.amount !== this.props.amount
-    ) {
-      this.updateAttributes();
-    }
-
-    /**
-     * If the width or height of the component change, then generate a new droplet array.
+     * If the props of the component change, then generate a new droplet array.
      * Immutably update the state to include a new array of droplets. Will invoke this.render().
      */
     if (prevProps !== this.props) {
+      /**
+       * If the type of precipitation changes, then we must update the style and dynamics of the droplets.
+       */
+      if (prevProps.type !== this.props.type) {
+        this.updateAttributes();
+      }
+
       this.setState({ ...this.state, droplets: this.newDropletArray() });
     }
   }
