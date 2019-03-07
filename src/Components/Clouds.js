@@ -21,14 +21,14 @@ class Clouds extends Component {
         console.log(this.state);
       });
     }
-    if (prevProps.rain !== this.props.rain) {
+    if (prevProps.precipitation !== this.props.precipitation) {
       this.updateAttributes();
     }
   }
   updateAttributes() {
     const newVal =
-      150 * (1 - (1 - this.props.rain)) +
-      (255 * (1 - this.props.rain - 0)) / (1 - 0);
+      150 * (1 - (1 - this.props.precipitation)) +
+      (255 * (1 - this.props.precipitation - 0)) / (1 - 0);
     this.style.color =
       "rgba(" + newVal + "," + newVal + "," + newVal + ",0.25)";
     console.log(this.style.color);
