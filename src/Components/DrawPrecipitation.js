@@ -1,23 +1,23 @@
-/*  
-  DrawPrecipitation.js
-  Author: Will Hall
-
-  DrawPrecipitation:React.Component - A React 'wrapper' for the HTML canvas element that paints droplets.
-    Props:
-      droplets: array,
-      --> an array of droplets to draw to the canvas.
-      style: object,
-      --> the style of the droplets on the canvas.
-      width: float,
-      height: float
-      --> The width and height of the component. Will be passed on to the HTML canvas. 
-          Can be updated after mounting, making the component resizable.
-    Children:
-      Stackable --> Allows for components to be stacked, giving a layered effect.
-*/
-
 import React, { Component } from "react";
 import Stackable from "./Stackable";
+
+/**
+ * A React 'wrapper' for the HTML canvas element that paints droplets.
+ *
+ * @author Will Hall
+ *
+ *   Props:
+ *     droplets: array,
+ *     --> an array of droplets to draw to the canvas.
+ *     style: object,
+ *     --> the style of the droplets on the canvas.
+ *     width: float,
+ *     height: float
+ *     --> The width and height of the component. Will be passed on to the HTML canvas.
+ *         Can be updated after mounting, making the component resizable.
+ *  Children:
+ *     Stackable --> Allows for components to be stacked, giving a layered effect.
+ */
 
 class DrawPrecipitation extends Component {
   constructor(props) {
@@ -45,7 +45,7 @@ class DrawPrecipitation extends Component {
     /**
      * Pass styles from the props to the canvas context.
      */
-    this.ctx.strokeStyle = style.color;
+    this.ctx.strokeStyle = style.colour;
     this.ctx.lineWidth = style.size;
     this.ctx.lineCap = "round";
 

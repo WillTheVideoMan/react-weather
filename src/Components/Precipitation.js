@@ -1,24 +1,10 @@
-/*
-  Precipitation.js
-  Author: Will Hall
-
-  Precipitation:React.Component - A component that generates, animates and renders droplets of a given precipitation type on a HTML Canvas.
-    Props:
-      type: string,
-      --> defines the type of precipitation. Can be 'rain', 'sleet' or 'snow'
-      amount: integer,
-      --> defines the amount of precipitation. A value between 0 and 1.
-      width: float,
-      height: float,
-      --> The width and height of the component. Can be updated after mounting, making the component resizable.
-    Children:
-      DrawPrecipitation --> Where the painting to canvas actually happens.
-      
-*/
-
 import React, { Component } from "react";
 import DrawPrecipitation from "./DrawPrecipitation";
+import PropTypes from "prop-types";
 
+/**
+ *  A component that generates, animates and renders droplets of a given precipitation type on a HTML Canvas.
+ */
 class Precipitation extends Component {
   constructor(props) {
     super(props);
@@ -48,12 +34,12 @@ class Precipitation extends Component {
      * STYLE - defines how the droplets look.
      *
      * style:
-     *  color: string,
+     *  colour: string,
      *  --> A hex or rgb/a string.
      *  size: integer,
      *  --> The the width of each droplet.
      */
-    this.style = { color: null, size: null };
+    this.style = { colour: null, size: null };
 
     /**
      * rAF - holds a reference to the requestID for the requestAnimationFrame method.
@@ -65,6 +51,31 @@ class Precipitation extends Component {
      */
     this.animate = this.animate.bind(this);
   }
+
+  /**
+   * Define the property types.
+   */
+  static propTypes = {
+    /**
+     * Defines the type of precipitation. Can be `rain`, `sleet` or `snow`
+     */
+    type: PropTypes.string,
+
+    /**
+     * Defines the amount of precipitation. A value between `0` and `1`.
+     */
+    amount: PropTypes.number,
+
+    /**
+     * The width of the component. Can be updated after mounting, making the component resizable.
+     */
+    width: PropTypes.number,
+
+    /**
+     * The height of the component. Can be updated after mounting, making the component resizable.
+     */
+    height: PropTypes.number
+  };
 
   /**
    * Called when the component is mounted to the DOM.
@@ -113,21 +124,21 @@ class Precipitation extends Component {
     switch (this.props.type) {
       default:
       case "rain":
-        this.style.color = "rgba(174,194,224,0.6)";
+        this.style.colour = "rgba(174,194,224,0.6)";
         this.style.size = 1;
         this.dynamics.drift = 1;
         this.dynamics.fall = 8;
         this.dynamics.streak = 2;
         break;
       case "snow":
-        this.style.color = "rgba(255,255,255,0.6)";
+        this.style.colour = "rgba(255,255,255,0.6)";
         this.style.size = 3;
         this.dynamics.drift = 2;
         this.dynamics.fall = 1;
         this.dynamics.streak = 0;
         break;
       case "sleet":
-        this.style.color = "rgba(190,200,224,0.6)";
+        this.style.colour = "rgba(190,200,224,0.6)";
         this.style.size = 2;
         this.dynamics.drift = 2;
         this.dynamics.fall = 4;

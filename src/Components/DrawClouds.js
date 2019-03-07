@@ -12,7 +12,7 @@ class DrawClouds extends Component {
   componentDidUpdate() {
     const { width, height, clouds, style } = this.props;
 
-    this.ctx.fillStyle = style.color;
+    this.ctx.fillStyle = style.colour;
     this.ctx.clearRect(0, 0, width, height);
 
     clouds.forEach(cloud => {
