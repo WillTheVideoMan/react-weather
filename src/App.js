@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-import Weather from "./components/Weather";
+import ReactResizeDetector from "react-resize-detector";
+import Precipitation from "./components/Precipitation";
+import Clouds from "./components/Clouds";
 
 const Container = styled.div`
   width: 100vw;
@@ -22,7 +24,15 @@ class App extends Component {
     return (
       <Background>
         <Container>
-          <Weather />
+          <ReactResizeDetector
+            handleWidth
+            handleHeight
+            refreshMode="throttle"
+            refreshRate={500}
+          >
+            <Precipitation width={0} height={0} type="rain" amount={1} />
+            <Clouds width={0} height={0} cover={1} wind={1} precipitation={1} />
+          </ReactResizeDetector>
         </Container>
       </Background>
     );
