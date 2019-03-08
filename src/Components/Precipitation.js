@@ -4,6 +4,8 @@ import PropTypes from "prop-types";
 
 /**
  *  A component that generates, animates and renders droplets of a given precipitation type on a HTML Canvas.
+ *
+ * **Returns:** A [`DrawPrecipitation`](#drawprecipitation) Component, passing a droplet array and styles.
  */
 class Precipitation extends Component {
   constructor(props) {

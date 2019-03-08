@@ -1,6 +1,7 @@
 {
   "name": "weather",
   "version": "0.1.0",
+  "author": "WillTheVideoMan",
   "private": true,
   "dependencies": {
     "prop-types": "^15.7.2",
