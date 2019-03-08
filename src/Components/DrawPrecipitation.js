@@ -5,6 +5,8 @@ import Stackable from "./Stackable";
 /**
  * A React 'wrapper' for the HTML canvas element that paints droplets.
  *
+ * A `droplet` object looks [like this](https://github.com/WillTheVideoMan/react-weather/blob/dbc6eb8865b127525cf1a74afbaf6526879d4d60/src/Components/Precipitation.js#L168-L182).
+ *
  *  **Returns:** A HTML5 Canvas wrapped in a [`Stackable`](#stackable) component.
  */
 
