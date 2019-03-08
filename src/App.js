@@ -3,6 +3,7 @@ import styled from "styled-components";
 import ReactResizeDetector from "react-resize-detector";
 import Precipitation from "./components/Precipitation";
 import Clouds from "./components/Clouds";
+import Celestial from "./components/Celestial";
 
 const Container = styled.div`
   width: 100vw;
@@ -30,8 +31,9 @@ class App extends Component {
             refreshMode="throttle"
             refreshRate={500}
           >
-            <Precipitation width={0} height={0} type="rain" amount={1} />
-            <Clouds width={0} height={0} cover={1} wind={1} precipitation={1} />
+            <Precipitation type="rain" amount={0.5} />
+            <Celestial isDay={false} cloudCover={0.5} />
+            <Clouds cover={0.5} wind={1} precipitation={0.5} />
           </ReactResizeDetector>
         </Container>
       </Background>

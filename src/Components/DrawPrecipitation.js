@@ -52,31 +52,33 @@ class DrawPrecipitation extends Component {
   /**
    * Paint the array of droplets to the canvas whenever new props are passed down.
    */
-  componentDidUpdate() {
-    const { width, height, droplets, style } = this.props;
+  componentDidUpdate(prevProps) {
+    if (prevProps !== this.props) {
+      const { width, height, droplets, style } = this.props;
 
-    /**
-     * Pass styles from the props to the canvas context.
-     */
-    this.ctx.strokeStyle = style.colour;
-    this.ctx.lineWidth = style.size;
-    this.ctx.lineCap = "round";
+      /**
+       * Pass styles from the props to the canvas context.
+       */
+      this.ctx.strokeStyle = style.colour;
+      this.ctx.lineWidth = style.size;
+      this.ctx.lineCap = "round";
 
-    /**
-     * Clear the whole canvas.
-     */
-    this.ctx.clearRect(0, 0, width, height);
+      /**
+       * Clear the whole canvas.
+       */
+      this.ctx.clearRect(0, 0, width, height);
 
-    /**
-     * Paints a droplet by first moving the paint origin to the x and y value of each droplet,
-     * then drawing a line based on the length and displacement ('speed') of each droplet
-     */
-    droplets.forEach(drop => {
-      this.ctx.beginPath();
-      this.ctx.moveTo(drop.x, drop.y);
-      this.ctx.lineTo(drop.x + drop.l * drop.xs, drop.y + drop.l * drop.ys);
-      this.ctx.stroke();
-    });
+      /**
+       * Paints a droplet by first moving the paint origin to the x and y value of each droplet,
+       * then drawing a line based on the length and displacement ('speed') of each droplet
+       */
+      droplets.forEach(drop => {
+        this.ctx.beginPath();
+        this.ctx.moveTo(drop.x, drop.y);
+        this.ctx.lineTo(drop.x + drop.l * drop.xs, drop.y + drop.l * drop.ys);
+        this.ctx.stroke();
+      });
+    }
   }
 
   /**
