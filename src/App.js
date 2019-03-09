@@ -4,6 +4,7 @@ import ReactResizeDetector from "react-resize-detector";
 import Precipitation from "./components/Precipitation";
 import Clouds from "./components/Clouds";
 import Celestial from "./components/Celestial";
+import Sky from "./components/Sky";
 
 const Container = styled.div`
   width: 100vw;
@@ -34,6 +35,7 @@ class App extends Component {
             refreshMode="throttle"
             refreshRate={500}
           >
+            <Sky isDay={this.props.isDay} cloudCover={this.props.cloudCover} />
             <Celestial
               isDay={this.props.isDay}
               cloudCover={this.props.cloudCover}
