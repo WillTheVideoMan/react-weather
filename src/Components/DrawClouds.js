@@ -60,39 +60,48 @@ class DrawClouds extends Component {
 
   /**
    * Get the 2D context of the canvas when it is mounted to the DOM.
+   * Draw the very first set of Clouds.
    */
   componentDidMount() {
     this.ctx = this.canvas.current.getContext("2d");
+    this.draw();
   }
 
   /**
-   * Paints an array of clouds to the canvas when the properties change.
+   * If the properties of the clouds change, then draw the new clouds. (Usually the next "frame" of clouds).
    *
    * @param {*} prevProps - The previous properties before the component was updated.
    */
   componentDidUpdate(prevProps) {
     if (prevProps !== this.props) {
-      const { width, height, clouds, style } = this.props;
-
-      /**
-       * Pass the style string to the canvas context
-       */
-      this.ctx.fillStyle = style.colour;
-
-      /**
-       * Clear the whole canvas.
-       */
-      this.ctx.clearRect(0, 0, width, height);
-
-      /**
-       * For each cloud, draw a circle dependant on radius and fill it with the defined style.
-       */
-      clouds.forEach(cloud => {
-        this.ctx.beginPath();
-        this.ctx.arc(cloud.x, cloud.y, cloud.radius, 0, Math.PI * 2);
-        this.ctx.fill();
-      });
+      this.draw();
     }
+  }
+
+  /**
+   * Paints an array of cloud objects using a given style.
+   */
+  draw() {
+    const { width, height, clouds, style } = this.props;
+
+    /**
+     * Pass the style string to the canvas context
+     */
+    this.ctx.fillStyle = style.colour;
+
+    /**
+     * Clear the whole canvas.
+     */
+    this.ctx.clearRect(0, 0, width, height);
+
+    /**
+     * For each cloud, draw a circle dependant on radius and fill it with the defined style.
+     */
+    clouds.forEach(cloud => {
+      this.ctx.beginPath();
+      this.ctx.arc(cloud.x, cloud.y, cloud.radius, 0, Math.PI * 2);
+      this.ctx.fill();
+    });
   }
 
   /**

@@ -5,11 +5,11 @@ import App from "./App";
 
 ReactDOM.render(
   <App
-    precipType="snow"
-    precipAmount={0.1}
-    cloudCover={0.1}
-    wind={0.1}
-    isDay={true}
+    precipType="rain"
+    precipAmount={1}
+    cloudCover={1}
+    wind={1}
+    isDay={false}
   />,
   document.getElementById("root")
 );

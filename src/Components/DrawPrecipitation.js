@@ -60,43 +60,52 @@ class DrawPrecipitation extends Component {
 
   /**
    * Get the 2D context of the canvas when it is mounted to the DOM.
+   * Draw the very first set of droplets.
    */
   componentDidMount() {
     this.ctx = this.canvas.current.getContext("2d");
+    this.draw();
   }
 
   /**
-   * Paint the array of droplets to the canvas whenever new props are passed down.
+   * If the properties of the droplets change, then draw the new droplets. (Usually the next "frame" of droplets).
    *
    * @param {*} prevProps - The previous properties before the component was updated.
    */
   componentDidUpdate(prevProps) {
     if (prevProps !== this.props) {
-      const { width, height, droplets, style } = this.props;
-
-      /**
-       * Pass styles from the props to the canvas context.
-       */
-      this.ctx.strokeStyle = style.colour;
-      this.ctx.lineWidth = style.size;
-      this.ctx.lineCap = "round";
-
-      /**
-       * Clear the whole canvas.
-       */
-      this.ctx.clearRect(0, 0, width, height);
-
-      /**
-       * Paints a droplet by first moving the paint origin to the x and y value of each droplet,
-       * then drawing a line based on the length and displacement ('speed') of each droplet
-       */
-      droplets.forEach(drop => {
-        this.ctx.beginPath();
-        this.ctx.moveTo(drop.x, drop.y);
-        this.ctx.lineTo(drop.x + drop.l * drop.xs, drop.y + drop.l * drop.ys);
-        this.ctx.stroke();
-      });
+      this.draw();
     }
+  }
+
+  /**
+   * Paints an array of droplets using a given style.
+   */
+  draw() {
+    const { width, height, droplets, style } = this.props;
+
+    /**
+     * Pass styles from the props to the canvas context.
+     */
+    this.ctx.strokeStyle = style.colour;
+    this.ctx.lineWidth = style.size;
+    this.ctx.lineCap = "round";
+
+    /**
+     * Clear the whole canvas.
+     */
+    this.ctx.clearRect(0, 0, width, height);
+
+    /**
+     * Paints a droplet by first moving the paint origin to the x and y value of each droplet,
+     * then drawing a line based on the length and displacement ('speed') of each droplet
+     */
+    droplets.forEach(drop => {
+      this.ctx.beginPath();
+      this.ctx.moveTo(drop.x, drop.y);
+      this.ctx.lineTo(drop.x + drop.l * drop.xs, drop.y + drop.l * drop.ys);
+      this.ctx.stroke();
+    });
   }
 
   /**

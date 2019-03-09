@@ -54,8 +54,12 @@ class Celestial extends Component {
     height: PropTypes.number
   };
 
+  componentDidMount() {
+    this.setState({ ...this.state, ...this.getNewCelestialBody() });
+  }
+
   /**
-   * If the properties change, we need to update the position and size of the body.
+   * If the properties change, we need to
    *
    * Will invoke `this.render()` when immutably updating state.
    *
@@ -63,21 +67,27 @@ class Celestial extends Component {
    */
   componentDidUpdate(prevProps) {
     if (prevProps !== this.props) {
-      /**
-       * Calculate a new radius based upon the size of the component.
-       */
-      const radius = Math.sqrt(this.props.width * this.props.height) * 0.15;
-
-      /**
-       * Immutably update the state of the component, calculating new positions based on new dimensions.
-       */
-      this.setState({
-        ...this.state,
-        x: this.props.width - radius * 1.3,
-        y: 1.3 * radius - 2 * radius * this.props.cloudCover,
-        radius: radius
-      });
+      this.setState({ ...this.state, ...this.getNewCelestialBody() });
     }
+  }
+
+  /**
+   * Returns a new celstial body.
+   */
+  getNewCelestialBody() {
+    /**
+     * Calculate a new radius based upon the size of the component.
+     */
+    const radius = Math.sqrt(this.props.width * this.props.height) * 0.15;
+
+    /**
+     * Return a new Celesial body, calculating new positions based on new dimensions.
+     */
+    return {
+      x: this.props.width - radius * 1.3,
+      y: 1.3 * radius - 2 * radius * this.props.cloudCover,
+      radius: radius
+    };
   }
 
   /**
