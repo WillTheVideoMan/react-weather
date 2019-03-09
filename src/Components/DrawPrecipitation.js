@@ -5,7 +5,15 @@ import Stackable from "./Stackable";
 /**
  * A React 'wrapper' for the HTML canvas element that paints droplets.
  *
- * A `droplet` object looks [like this](https://github.com/WillTheVideoMan/react-weather/blob/dbc6eb8865b127525cf1a74afbaf6526879d4d60/src/Components/Precipitation.js#L168-L182).
+ * An array of droplet objects are passed to this component as props.
+ *
+ * **A droplet object looks like this:**
+ *
+ * | Key | Type | Description|
+ * |---|---|---|
+ * |`x`,`y`|`float`| An x and y coordinate within the dimensions of the component. The origin of drawing for the droplet on the canvas.|
+ * |`l`|`float`| The length of each droplet on the canvas.|
+ * |`xs`,`ys`|`float`| A displacement on the x and y planes of the 'end' of each droplet from the origin of drawing.|
  *
  *  **Returns:** A HTML5 Canvas wrapped in a [`Stackable`](#stackable) component.
  */
@@ -18,6 +26,11 @@ class DrawPrecipitation extends Component {
      * Create a reference to the DOM node on which the canvas is mounted.
      */
     this.canvas = React.createRef();
+
+    /**
+     * Holds a refernce to the context of the HTML canvas.
+     */
+    this.ctx = null;
   }
 
   /**
@@ -28,14 +41,17 @@ class DrawPrecipitation extends Component {
      * An array of droplets to draw to the canvas. Must contain `droplet` object instances.
      */
     droplets: PropTypes.array,
+
     /**
      * A style object. Must contain the keys `colour` (rbg/a or hex string) and `size` (a 'brush stroke' size)
      */
     style: PropTypes.object,
+
     /**
      * The width of the component. Defines the width of the returned HTML5 Canvas.
      */
     width: PropTypes.number,
+
     /**
      * The height of the component. Defines the height of the returned HTML5 Canvas.
      */
@@ -51,6 +67,8 @@ class DrawPrecipitation extends Component {
 
   /**
    * Paint the array of droplets to the canvas whenever new props are passed down.
+   *
+   * @param {*} prevProps - The previous properties before the component was updated.
    */
   componentDidUpdate(prevProps) {
     if (prevProps !== this.props) {

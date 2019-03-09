@@ -5,10 +5,9 @@ import DrawCelestial from "./DrawCelestial";
 /**
  *  A component that shows the sun during the day and moon during the night.
  *
- *  Uses the `cloudCover` property to work out the position of the sun and moon.
+ *  Uses the `cloudCover` property to work out the position of the sun and moon, giving it's 'hidden-ness' in the clouds.
  *
- *  This weather layer does not animate over time, rather prints a static repersentation depending on properties,
- *  and so does not require seperate animation and drawing components.
+ *  This weather layer does not animate over time, but rather prints a static repersentation depending on properties.
  *
  * **Returns:** A [`DrawPrecipitation`](#drawprecipitation) Component, passing a droplet array and styles.
  */
@@ -16,6 +15,17 @@ import DrawCelestial from "./DrawCelestial";
 class Celestial extends Component {
   constructor(props) {
     super(props);
+
+    /**
+     * STATE - Holds the current parameters of the celestial body.
+     *
+     * x: float,
+     * y: float,
+     * --> The x and y coordinate of the celesial body on the HTML5 Canvas.
+     *
+     * radius: float
+     * --> The radius of the celestial body. Used to calculate x and y positioning.
+     */
     this.state = { x: null, y: null, radius: null };
   }
 
@@ -29,7 +39,7 @@ class Celestial extends Component {
     isDay: PropTypes.bool,
 
     /**
-     * Defines the amount of cloud coverage. This will determine how 'hidden' the celestial bodies are.
+     * Defines the amount of cloud coverage. A value between `0` and `1`. This will determine how 'hidden' the celestial bodies are.
      */
     cloudCover: PropTypes.number,
 

@@ -21,6 +21,9 @@ const Background = styled.div`
 `;
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+  }
   render() {
     return (
       <Background>
@@ -31,9 +34,19 @@ class App extends Component {
             refreshMode="throttle"
             refreshRate={500}
           >
-            <Precipitation type="rain" amount={0.5} />
-            <Celestial isDay={false} cloudCover={0.5} />
-            <Clouds cover={0.5} wind={1} precipitation={0.5} />
+            <Celestial
+              isDay={this.props.isDay}
+              cloudCover={this.props.cloudCover}
+            />
+            <Precipitation
+              precipType={this.props.precipType}
+              precipAmount={this.props.precipAmount}
+            />
+            <Clouds
+              cloudCover={this.props.cloudCover}
+              wind={this.props.wind}
+              precipAmount={this.props.precipAmount}
+            />
           </ReactResizeDetector>
         </Container>
       </Background>

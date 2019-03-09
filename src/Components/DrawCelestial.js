@@ -5,7 +5,7 @@ import Stackable from "./Stackable";
 /**
  * A React 'wrapper' for the HTML canvas element that paints a glowing sparkly sun or a cool shiny moon.
  *
- *  **Returns:** A HTML5 Canvas wrapped in a [`Stackable`](#stackable) component.
+ * **Returns:** A HTML5 Canvas wrapped in a [`Stackable`](#stackable) component.
  */
 
 class DrawCelestial extends Component {
