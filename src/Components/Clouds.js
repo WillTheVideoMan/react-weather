@@ -188,17 +188,23 @@ class Clouds extends Component {
   /**
    * The main render function, handled by React.
    *
-   * Returns a `DrawClouds` component and passes in a droplet array to print.
+   * Returns a `DrawClouds` component and passes in a cloud array to print.
+   *
+   * First checks if the component has a width and a height to prevent printing to an unsized canvas.
    */
   render() {
-    return (
-      <DrawClouds
-        clouds={this.state.clouds}
-        style={this.style}
-        width={this.props.width}
-        height={this.props.height}
-      />
-    );
+    if (this.props.width && this.props.height) {
+      return (
+        <DrawClouds
+          clouds={this.state.clouds}
+          style={this.style}
+          width={this.props.width}
+          height={this.props.height}
+        />
+      );
+    } else {
+      return null;
+    }
   }
 }
 

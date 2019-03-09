@@ -6,10 +6,10 @@ import App from "./App";
 ReactDOM.render(
   <App
     precipType="rain"
-    precipAmount={1}
-    cloudCover={1}
-    wind={1}
-    isDay={false}
+    precipAmount={0.2}
+    cloudCover={0.2}
+    wind={0.2}
+    isDay={true}
   />,
   document.getElementById("root")
 );
