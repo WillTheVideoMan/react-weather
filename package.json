@@ -1,8 +1,10 @@
 {
   "name": "weather",
   "version": "0.1.0",
+  "author": "WillTheVideoMan",
   "private": true,
   "dependencies": {
+    "prop-types": "^15.7.2",
     "react": "^16.8.3",
     "react-dom": "^16.8.3",
     "react-resize-detector": "^3.4.0",
@@ -23,5 +25,8 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "react-styleguidist": "^9.0.3"
+  }
 }

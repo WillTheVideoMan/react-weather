@@ -3,22 +3,22 @@ import PropTypes from "prop-types";
 import Stackable from "./Stackable";
 
 /**
- * A React 'wrapper' for the HTML canvas element that paints droplets.
+ * A React 'wrapper' for the HTML canvas element that paints clouds.
  *
- * An array of droplet objects are passed to this component as props.
+ * An array of cloud objects are passed to this component as props.
  *
- * **A droplet object looks like this:**
+ * **A cloud object looks like this:**
  *
  * | Key | Type | Description|
  * |---|---|---|
- * |`x`,`y`|`float`| An x and y coordinate within the dimensions of the component. The origin of drawing for the droplet on the canvas.|
- * |`l`|`float`| The length of each droplet on the canvas.|
- * |`xs`,`ys`|`float`| A displacement on the x and y planes of the 'end' of each droplet from the origin of drawing.|
+ * |`x`,`y`|`float`| An x and y coordinate within the dimensions of the component. The origin of drawing for the cloud on the canvas.|
+ * |`radius`|`float`| The radius of each cloud on the canvas.|
+ * |`speed`|`float`| The horizontal speed of each cloud as they move across the component.|
  *
  *  **Returns:** A HTML5 Canvas wrapped in a [`Stackable`](#stackable) component.
  */
 
-class DrawPrecipitation extends Component {
+class DrawClouds extends Component {
   constructor(props) {
     super(props);
 
@@ -38,12 +38,12 @@ class DrawPrecipitation extends Component {
    */
   static propTypes = {
     /**
-     * An array of droplets to draw to the canvas. Must contain `droplet` object instances.
+     * An array of clouds to be painted. Contains unnamed instances of `cloud` objects.
      */
-    droplets: PropTypes.array,
+    clouds: PropTypes.array,
 
     /**
-     * A style object. Must contain the keys `colour` (rbg/a or hex string) and `size` (a 'brush stroke' size)
+     * The style of the clouds. Must contain the key `colour`: an rbg/a or hex string.
      */
     style: PropTypes.object,
 
@@ -66,20 +66,18 @@ class DrawPrecipitation extends Component {
   }
 
   /**
-   * Paint the array of droplets to the canvas whenever new props are passed down.
+   * Paints an array of clouds to the canvas when the properties change.
    *
    * @param {*} prevProps - The previous properties before the component was updated.
    */
   componentDidUpdate(prevProps) {
     if (prevProps !== this.props) {
-      const { width, height, droplets, style } = this.props;
+      const { width, height, clouds, style } = this.props;
 
       /**
-       * Pass styles from the props to the canvas context.
+       * Pass the style string to the canvas context
        */
-      this.ctx.strokeStyle = style.colour;
-      this.ctx.lineWidth = style.size;
-      this.ctx.lineCap = "round";
+      this.ctx.fillStyle = style.colour;
 
       /**
        * Clear the whole canvas.
@@ -87,21 +85,20 @@ class DrawPrecipitation extends Component {
       this.ctx.clearRect(0, 0, width, height);
 
       /**
-       * Paints a droplet by first moving the paint origin to the x and y value of each droplet,
-       * then drawing a line based on the length and displacement ('speed') of each droplet
+       * For each cloud, draw a circle dependant on radius and fill it with the defined style.
        */
-      droplets.forEach(drop => {
+      clouds.forEach(cloud => {
         this.ctx.beginPath();
-        this.ctx.moveTo(drop.x, drop.y);
-        this.ctx.lineTo(drop.x + drop.l * drop.xs, drop.y + drop.l * drop.ys);
-        this.ctx.stroke();
+        this.ctx.arc(cloud.x, cloud.y, cloud.radius, 0, Math.PI * 2);
+        this.ctx.fill();
       });
     }
   }
 
   /**
-   * Main render function (called by React.Component).
-   * The canvas is wrapped in a Stackable component to allow component layering.
+   * Main render function handled by React.
+   *
+   * Returns a canvas wrapped in a `Stackable` componenet to allow layering.
    */
   render() {
     return (
@@ -116,4 +113,4 @@ class DrawPrecipitation extends Component {
   }
 }
 
-export default DrawPrecipitation;
+export default DrawClouds;

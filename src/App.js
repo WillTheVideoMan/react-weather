@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-import Weather from "./Components/Weather";
+import ReactResizeDetector from "react-resize-detector";
+import Precipitation from "./components/Precipitation";
+import Clouds from "./components/Clouds";
+import Celestial from "./components/Celestial";
 
 const Container = styled.div`
   width: 100vw;
@@ -18,11 +21,33 @@ const Background = styled.div`
 `;
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+  }
   render() {
     return (
       <Background>
         <Container>
-          <Weather />
+          <ReactResizeDetector
+            handleWidth
+            handleHeight
+            refreshMode="throttle"
+            refreshRate={500}
+          >
+            <Celestial
+              isDay={this.props.isDay}
+              cloudCover={this.props.cloudCover}
+            />
+            <Precipitation
+              precipType={this.props.precipType}
+              precipAmount={this.props.precipAmount}
+            />
+            <Clouds
+              cloudCover={this.props.cloudCover}
+              wind={this.props.wind}
+              precipAmount={this.props.precipAmount}
+            />
+          </ReactResizeDetector>
         </Container>
       </Background>
     );
