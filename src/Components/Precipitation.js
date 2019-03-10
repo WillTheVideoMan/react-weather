@@ -226,17 +226,24 @@ class Precipitation extends Component {
 
   /**
    * Main render function (called by React.Component).
-   * Returns an instance of the DrawPrecipitation component.
+   *
+   * Returns a `DrawPrecipitation` component and passes in a droplet array.
+   *
+   * First checks if the component has a width and a height to prevent printing to an unsized canvas.
    */
   render() {
-    return (
-      <DrawPrecipitation
-        droplets={this.state.droplets}
-        style={this.style}
-        width={this.props.width}
-        height={this.props.height}
-      />
-    );
+    if (this.props.width && this.props.height) {
+      return (
+        <DrawPrecipitation
+          droplets={this.state.droplets}
+          style={this.style}
+          width={this.props.width}
+          height={this.props.height}
+        />
+      );
+    } else {
+      return null;
+    }
   }
 }
 

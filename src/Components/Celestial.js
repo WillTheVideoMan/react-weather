@@ -96,19 +96,27 @@ class Celestial extends Component {
   }
 
   /**
-   * The main render function. Returns a `DrawCelestial` component with a given position on the canvas.
+   * The main render function handled by React.
+   *
+   * Returns a `DrawCelestial` component with a given position on the canvas.
+   *
+   * First checks if the component has a width and a height to prevent printing to an unsized canvas.
    */
   render() {
-    return (
-      <DrawCelestial
-        isDay={this.props.isDay}
-        width={this.props.width}
-        height={this.props.height}
-        x={this.state.x}
-        y={this.state.y}
-        radius={this.state.radius}
-      />
-    );
+    if (this.props.width && this.props.height) {
+      return (
+        <DrawCelestial
+          isDay={this.props.isDay}
+          width={this.props.width}
+          height={this.props.height}
+          x={this.state.x}
+          y={this.state.y}
+          radius={this.state.radius}
+        />
+      );
+    } else {
+      return null;
+    }
   }
 }
 

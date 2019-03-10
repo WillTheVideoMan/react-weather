@@ -108,7 +108,9 @@ class Sky extends Component {
   /**
    * Main render function handled by React.
    *
-   * First checks if the component has a width and a height to prevent printing to an unsizec canvas.
+   * Returns a `DrawSky` component with a given colour.
+   *
+   * First checks if the component has a width and a height to prevent printing to an unsized canvas.
    */
   render() {
     if (this.props.width && this.props.height) {
