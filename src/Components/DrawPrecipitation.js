@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import Stackable from "./Stackable";
 
 /**
  * A React 'wrapper' for the HTML canvas element that paints droplets.
@@ -15,7 +14,7 @@ import Stackable from "./Stackable";
  * |`l`|`float`| The length of each droplet on the canvas.|
  * |`xs`,`ys`|`float`| A displacement on the x and y planes of the 'end' of each droplet from the origin of drawing.|
  *
- *  **Returns:** A HTML5 Canvas wrapped in a [`Stackable`](#stackable) component.
+ *  **Returns:** A HTML5 Canvas which has the droplets painted on it.
  */
 
 class DrawPrecipitation extends Component {
@@ -40,12 +39,12 @@ class DrawPrecipitation extends Component {
     /**
      * An array of droplets to draw to the canvas. Must contain `droplet` object instances.
      */
-    droplets: PropTypes.array,
+    droplets: PropTypes.array.isRequired,
 
     /**
      * A style object. Must contain the keys `colour` (rbg/a or hex string) and `size` (a 'brush stroke' size)
      */
-    style: PropTypes.object,
+    style: PropTypes.object.isRequired,
 
     /**
      * The width of the component. Defines the width of the returned HTML5 Canvas.
@@ -110,17 +109,15 @@ class DrawPrecipitation extends Component {
 
   /**
    * Main render function (called by React.Component).
-   * The canvas is wrapped in a Stackable component to allow component layering.
+   * Returns a HTML5 Canvas.
    */
   render() {
     return (
-      <Stackable>
-        <canvas
-          ref={this.canvas}
-          width={this.props.width}
-          height={this.props.height}
-        />
-      </Stackable>
+      <canvas
+        ref={this.canvas}
+        width={this.props.width}
+        height={this.props.height}
+      />
     );
   }
 }

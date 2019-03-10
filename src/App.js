@@ -5,55 +5,76 @@ import Precipitation from "./components/Precipitation";
 import Clouds from "./components/Clouds";
 import Celestial from "./components/Celestial";
 import Sky from "./components/Sky";
-
-const Container = styled.div`
-  width: 100vw;
-  height: 100vh;
-  border: 2px solid #2b2b2b;
-  overflow: none;
-  box-sizing: border-box;
-`;
-
-const Background = styled.div`
-  width: 100vw;
-  height: 100vh;
-  background-color: rgb(61, 61, 61);
-  max-width: 100%;
-`;
+import Information from "./components/Information";
 
 class App extends Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      precipType: "snow",
+      precipAmount: 0.2,
+      cloudCover: 0.2,
+      wind: 0.2,
+      isDay: false,
+      currentTemp: 0,
+      highTemp: 4,
+      lowTemp: -3,
+      summary: "Light Snow"
+    };
   }
+
   render() {
+    const {
+      precipType,
+      precipAmount,
+      cloudCover,
+      wind,
+      isDay,
+      currentTemp,
+      highTemp,
+      lowTemp,
+      summary
+    } = { ...this.state };
+
     return (
-      <Background>
-        <Container>
-          <ReactResizeDetector
-            handleWidth
-            handleHeight
-            refreshMode="throttle"
-            refreshRate={500}
-          >
-            <Sky isDay={this.props.isDay} cloudCover={this.props.cloudCover} />
-            <Celestial
-              isDay={this.props.isDay}
-              cloudCover={this.props.cloudCover}
-            />
-            <Precipitation
-              precipType={this.props.precipType}
-              precipAmount={this.props.precipAmount}
-            />
-            <Clouds
-              cloudCover={this.props.cloudCover}
-              wind={this.props.wind}
-              precipAmount={this.props.precipAmount}
-            />
-          </ReactResizeDetector>
-        </Container>
-      </Background>
+      <Container>
+        <ReactResizeDetector
+          handleWidth
+          handleHeight
+          refreshMode="throttle"
+          refreshRate={500}
+        >
+          <Sky isDay={isDay} cloudCover={cloudCover} />
+          <Celestial isDay={isDay} cloudCover={cloudCover} />
+          <Precipitation precipType={precipType} precipAmount={precipAmount} />
+          <Clouds
+            cloudCover={cloudCover}
+            wind={wind}
+            precipAmount={precipAmount}
+          />
+          <Information
+            currentTemp={currentTemp}
+            highTemp={highTemp}
+            lowTemp={lowTemp}
+            summary={summary}
+          />
+        </ReactResizeDetector>
+      </Container>
     );
   }
 }
+
+const Container = styled.div`
+  width: 100vw;
+  height: 100vh;
+  border: 5px solid #2b2b2b;
+  overflow: none;
+  box-sizing: border-box;
+
+  canvas {
+    position: absolute;
+  }
+`;
 
 export default App;

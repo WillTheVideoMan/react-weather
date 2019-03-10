@@ -22,12 +22,12 @@ class Sky extends Component {
     /**
      * Defines wether it is day or not, and so wether to paint bright sky blue or dark navy blue.
      */
-    isDay: PropTypes.bool,
+    isDay: PropTypes.bool.isRequired,
 
     /**
      * Defines the amount of cloud cover, and hence the 'grey-ness' of the sky. A value between `0` and `1`.
      */
-    cloudCover: PropTypes.number,
+    cloudCover: PropTypes.number.isRequired,
 
     /**
      * The width of the component. Defines the width of the returned HTML5 Canvas.
