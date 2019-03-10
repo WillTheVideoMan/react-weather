@@ -9,7 +9,7 @@ import DrawCelestial from "./DrawCelestial";
  *
  *  This weather layer does not animate over time, but rather prints a static repersentation depending on properties.
  *
- * **Returns:** A [`DrawPrecipitation`](#drawprecipitation) Component, passing a droplet array and styles.
+ * **Returns:** A [`DrawCelestial`](#drawcelestial) Component, passing a body to paint.
  */
 
 class Celestial extends Component {
@@ -36,12 +36,12 @@ class Celestial extends Component {
     /**
      * If it is day, then display the sun. Else, display the moon.
      */
-    isDay: PropTypes.bool,
+    isDay: PropTypes.bool.isRequired,
 
     /**
      * Defines the amount of cloud coverage. A value between `0` and `1`. This will determine how 'hidden' the celestial bodies are.
      */
-    cloudCover: PropTypes.number,
+    cloudCover: PropTypes.number.isRequired,
 
     /**
      * The width of the component. Can be updated after mounting, making the component resizable.
@@ -54,12 +54,17 @@ class Celestial extends Component {
     height: PropTypes.number
   };
 
+  /**
+   * When the component mounts, print the first celestial body.
+   *
+   * Will invoke `this.render()` when immutably updating state.
+   */
   componentDidMount() {
     this.setState({ ...this.state, ...this.getNewCelestialBody() });
   }
 
   /**
-   * If the properties change, we need to
+   * If the properties change, we need to generate a new celestial body to print.
    *
    * Will invoke `this.render()` when immutably updating state.
    *

@@ -39,12 +39,12 @@ class DrawClouds extends Component {
     /**
      * An array of clouds to be painted. Contains unnamed instances of `cloud` objects.
      */
-    clouds: PropTypes.array,
+    clouds: PropTypes.array.isRequired,
 
     /**
      * The style of the clouds. Must contain the key `colour`: an rbg/a or hex string.
      */
-    style: PropTypes.object,
+    style: PropTypes.object.isRequired,
 
     /**
      * The width of the component. Defines the width of the returned HTML5 Canvas.

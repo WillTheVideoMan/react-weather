@@ -39,12 +39,12 @@ class DrawPrecipitation extends Component {
     /**
      * An array of droplets to draw to the canvas. Must contain `droplet` object instances.
      */
-    droplets: PropTypes.array,
+    droplets: PropTypes.array.isRequired,
 
     /**
      * A style object. Must contain the keys `colour` (rbg/a or hex string) and `size` (a 'brush stroke' size)
      */
-    style: PropTypes.object,
+    style: PropTypes.object.isRequired,
 
     /**
      * The width of the component. Defines the width of the returned HTML5 Canvas.

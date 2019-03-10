@@ -47,17 +47,17 @@ class Clouds extends Component {
     /**
      * Defines the amount of cloud cover present, and so how many clouds to print. A value betwen `0` and `1`.
      */
-    cloudCover: PropTypes.number,
+    cloudCover: PropTypes.number.isRequired,
 
     /**
      * Defines the strenth of the wind. A value betwen `0` and `1`.
      */
-    wind: PropTypes.number,
+    wind: PropTypes.number.isRequired,
 
     /**
      * Defines the amount of precipiatatio falling, and hence the colour of the clouds. A value betwen `0` and `1`.
      */
-    precipAmount: PropTypes.number,
+    precipAmount: PropTypes.number.isRequired,
 
     /**
      * The width of the component. Can be updated after mounting, making the component resizable.

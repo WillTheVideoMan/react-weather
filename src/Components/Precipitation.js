@@ -64,12 +64,12 @@ class Precipitation extends Component {
     /**
      * Defines the type of precipitation. Can be `rain`, `sleet` or `snow`
      */
-    precipType: PropTypes.string,
+    precipType: PropTypes.string.isRequired,
 
     /**
      * Defines the precipAmount of precipitation. A value between `0` and `1`.
      */
-    precipAmount: PropTypes.number,
+    precipAmount: PropTypes.number.isRequired,
 
     /**
      * The width of the component. Can be updated after mounting, making the component resizable.
@@ -159,12 +159,12 @@ class Precipitation extends Component {
 
     /**
      * Uses the 'height', 'width' and 'precipAmount' props to work out how many droplets to have in the array.
-     * Capped at 1000 droplets for performance.
+     * Capped at 500 droplets for performance.
      */
     const count =
-      Math.sqrt(width * height) * precipAmount < 1000
+      Math.sqrt(width * height) * precipAmount < 500 * precipAmount
         ? Math.sqrt(width * height) * precipAmount
-        : 1000;
+        : 500 * precipAmount;
 
     /**
      * Pushes new randomly generated drops onto the 'droplets' array. 'droplets' is an array of unnamed objects.

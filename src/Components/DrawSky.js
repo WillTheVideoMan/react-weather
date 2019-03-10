@@ -20,9 +20,9 @@ class DrawSky extends Component {
 
   static propTypes = {
     /**
-     * The style of the sky to paint. Must contain the key `colour` which is an rbg/a or hex string.
+     * The style of the sky to paint. `colour` must be an rbg/a or hex string.
      */
-    style: PropTypes.object,
+    colour: PropTypes.string.isRequired,
 
     /**
      * The width of the component. Defines the width of the returned HTML5 Canvas.

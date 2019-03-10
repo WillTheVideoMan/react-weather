@@ -21,19 +21,19 @@ class DrawCelestial extends Component {
     /**
      * If it is day, then display the sun. Else, display the moon.
      */
-    isDay: PropTypes.bool,
+    isDay: PropTypes.bool.isRequired,
     /**
      * The x coordinate of the celestial body's center. The orgin is the top-left of the browser window.
      */
-    x: PropTypes.number,
+    x: PropTypes.number.isRequired,
     /**
      * The y coordinate of the celestial body's center. The orgin is the top-left of the browser window.
      */
-    y: PropTypes.number,
+    y: PropTypes.number.isRequired,
     /**
      * The radius of the celestial body.
      */
-    radius: PropTypes.number,
+    radius: PropTypes.number.isRequired,
     /**
      * The width of the component. Defines the width of the returned HTML5 Canvas.
      */
