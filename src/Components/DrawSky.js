@@ -1,13 +1,12 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import Stackable from "./Stackable";
 
 /**
  *  A component that paints a given colour string in a gradient across the component from top to bottom.
  *
  *  The sky transitions from a solid colour to transparent, allowing for any component background colour.
  *
- * **Returns:** A [`Stackable`](#stackable) Component, in which a HTML5 canvas paints the sky.
+ * **Returns:** A HTML5 Canvas with a given sky style.
  */
 class DrawSky extends Component {
   constructor(props) {
@@ -57,12 +56,10 @@ class DrawSky extends Component {
   }
 
   /**
-   * Paints a sky of given style.
+   * Paints a sky of given style. Generates a gradient from transparent to a given colour.
    */
   draw() {
     const { colour } = this.props;
-    const thunder = false;
-
     const gradient = this.ctx.createLinearGradient(
       0,
       0,
@@ -70,21 +67,30 @@ class DrawSky extends Component {
       this.props.height * 2
     );
 
+    /**
+     * Add the colour and transparent to the gradient. Colour stops are points on the gradient.
+     */
     gradient.addColorStop(0, colour);
     gradient.addColorStop(1, "rgba(0,0,0,0)");
+
+    /**
+     * Draw a rectangle the size of the screen which is filled with the gradient.
+     */
     this.ctx.fillStyle = gradient;
     this.ctx.fillRect(0, 0, this.props.width, this.props.height);
   }
 
+  /**
+   * Main render function (called by React.Component).
+   * Returns a HTML5 Canvas.
+   */
   render() {
     return (
-      <Stackable>
-        <canvas
-          ref={this.canvas}
-          width={this.props.width}
-          height={this.props.height}
-        />
-      </Stackable>
+      <canvas
+        ref={this.canvas}
+        width={this.props.width}
+        height={this.props.height}
+      />
     );
   }
 }

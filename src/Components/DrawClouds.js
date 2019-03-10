@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import Stackable from "./Stackable";
 
 /**
  * A React 'wrapper' for the HTML canvas element that paints clouds.
@@ -15,7 +14,7 @@ import Stackable from "./Stackable";
  * |`radius`|`float`| The radius of each cloud on the canvas.|
  * |`speed`|`float`| The horizontal speed of each cloud as they move across the component.|
  *
- *  **Returns:** A HTML5 Canvas wrapped in a [`Stackable`](#stackable) component.
+ *  **Returns:** A HTML5 Canvas that the clouds are painted to.
  */
 
 class DrawClouds extends Component {
@@ -105,19 +104,16 @@ class DrawClouds extends Component {
   }
 
   /**
-   * Main render function handled by React.
-   *
-   * Returns a canvas wrapped in a `Stackable` componenet to allow layering.
+   * Main render function (called by React.Component).
+   * Returns a HTML5 Canvas.
    */
   render() {
     return (
-      <Stackable>
-        <canvas
-          ref={this.canvas}
-          width={this.props.width}
-          height={this.props.height}
-        />
-      </Stackable>
+      <canvas
+        ref={this.canvas}
+        width={this.props.width}
+        height={this.props.height}
+      />
     );
   }
 }

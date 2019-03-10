@@ -1,11 +1,10 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import Stackable from "./Stackable";
 
 /**
  * A React 'wrapper' for the HTML canvas element that paints a glowing sparkly sun or a cool shiny moon.
  *
- * **Returns:** A HTML5 Canvas wrapped in a [`Stackable`](#stackable) component.
+ * **Returns:** A HTML5 Canvas on which the celestial body is printed.
  */
 
 class DrawCelestial extends Component {
@@ -136,17 +135,15 @@ class DrawCelestial extends Component {
 
   /**
    * Main render function (called by React.Component).
-   * The canvas is wrapped in a Stackable component to allow component layering.
+   * Returns a HTML5 Canvas.
    */
   render() {
     return (
-      <Stackable>
-        <canvas
-          ref={this.canvas}
-          width={this.props.width}
-          height={this.props.height}
-        />
-      </Stackable>
+      <canvas
+        ref={this.canvas}
+        width={this.props.width}
+        height={this.props.height}
+      />
     );
   }
 }
