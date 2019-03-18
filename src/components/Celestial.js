@@ -7,7 +7,7 @@ import DrawCelestial from "./DrawCelestial";
  *
  *  Uses the `cloudCover` property to work out the position of the sun and moon, giving it's 'hidden-ness' in the clouds.
  *
- *  This weather layer does not animate over time, but rather prints a static repersentation depending on properties.
+ *  This weather layer does not animate over time, but instead prints a static repersentation depending on properties.
  *
  * **Returns:** A [`DrawCelestial`](#drawcelestial) Component, passing a body to paint.
  */
